@@ -25,7 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
         "test_node=robo_controller.first_node:main",
-        "draw_circle=robo_controller.publisher:main"
+        "draw_circle=robo_controller.publisher:main",
+        "pos_subscriber=robo_controller.sub:main"
         
 
         ],

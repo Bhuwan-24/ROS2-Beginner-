@@ -6,10 +6,10 @@ class mynode(Node):
 
     def __init__(self):
         super().__init__("mynode")
-        self.create_timer(1.0,self.timer_call())
+        self.create_timer(1.0,self.timer_call)
         
     def timer_call(self):
-        self.get_logger.info("Hello world")
+        self.get_logger().info("Hello world")
 
 
 def main(args=None):
