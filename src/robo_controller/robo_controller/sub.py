@@ -13,10 +13,6 @@ class sub_pose(Node):
         self.get_logger().info(str(msg))
 
 
-
-
-
-
 def main(args=None):
     rclpy.init(args=args)
     node=sub_pose()
