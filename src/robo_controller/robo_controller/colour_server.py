@@ -5,8 +5,8 @@ from turtlesim.srv import SetPen
 
 class set_color(Node):
     def __init__(self):
-        super().__init__("change_colour")
-        self.srv=self.create_service(SetPen,"change_pen_color",self.colour)
+        super().__init__("colour_server")
+        self.srv=self.create_service(SetPen,"change_pen_colour",self.colour)
 
         self.get_logger().info("service started..........")
 
