@@ -9,7 +9,7 @@ class add_client(Node):
         self.client=self.create_client(AddTwoInts,"add_here")
 
         while not self.client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("waiting for server to be free...........")
+            self.get_logger().info("waiting for server")
         
         self.request=AddTwoInts.Request()
 

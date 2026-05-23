@@ -28,8 +28,9 @@ setup(
         "draw_circle=robo_controller.publisher:main",
         "pos_subscriber=robo_controller.sub:main",
         "crash_avoid=robo_controller.smart_turtle:main",
-        "random_rotate=robo_controller.rndm_trtl:main"
-        
+        "random_rotate=robo_controller.rndm_trtl:main",
+        "add_server=robo_controller.server:main",
+        "add_client=robo_controller.client:main"
 
         ],
     },
