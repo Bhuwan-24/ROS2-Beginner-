@@ -13,7 +13,7 @@ class add_client(Node):
         
         self.request=AddTwoInts.Request()
 
-    def request(self,a,b):
+    def send_request(self,a,b):
         self.request.a=a
         self.request.b=b
         future =self.client.call_async(self.request)
@@ -25,7 +25,7 @@ class add_client(Node):
 def main(args=None):
     rclpy.init(args=args)
     client=add_client()
-    response=client.request(5,2)
+    response=client.send_request(5,2)
     client.get_logger().info(f"Response : {response.sum}")
     rclpy.shutdown()
     
