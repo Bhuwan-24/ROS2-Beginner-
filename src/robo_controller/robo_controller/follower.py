@@ -3,6 +3,7 @@ import rclpy
 from rclpy.node import Node
 from turtlesim.srv import Spawn
 from turtlesim.msg import Pose
+from geometry_msgs.msg import Twist
 
 class new_turtle(Node):
     
@@ -24,7 +25,7 @@ class new_turtle(Node):
 class follow(Node):
     def __init__(self):
         super().__init__("follower")
-        self
+        self.pub=self.create_publisher()
 
 
 
