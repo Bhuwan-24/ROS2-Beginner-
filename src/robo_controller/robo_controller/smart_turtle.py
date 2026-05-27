@@ -23,7 +23,7 @@ class smart_turtle(Node):
 
         else:
             self.get_logger().info("moving.......")
-            vel.linear.x=2.0
+            vel.linear.x=0.5
             vel.angular.x=0.0
 
         self.pub.publish(vel)

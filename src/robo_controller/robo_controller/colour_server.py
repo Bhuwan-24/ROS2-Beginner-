@@ -6,7 +6,7 @@ from turtlesim.srv import SetPen
 class set_color(Node):
     def __init__(self):
         super().__init__("colour_server")
-        self.srv=self.create_service(SetPen,"change_pen_colour",self.colour)
+        self.srv=self.create_service(SetPen,"/turtle1/set_pen",self.colour)
 
         self.get_logger().info("service started..........")
 
@@ -16,8 +16,8 @@ class set_color(Node):
 
         return response
     
-    def main(args=None):
-        rclpy.init(args=args)
-        node=set_color()
-        rclpy.spin(node)
-        rclpy.shutdown()
+def main(args=None):
+    rclpy.init(args=args)
+    node=set_color()
+    rclpy.spin(node)
+    rclpy.shutdown()

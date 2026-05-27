@@ -3,6 +3,7 @@ import random
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from rclpy.node import Node
+from turtlesim.srv import SetPen
 
 class rndm_mvmt(Node):
     def __init__(self):
@@ -10,6 +11,7 @@ class rndm_mvmt(Node):
         
         self.vel=self.create_publisher(Twist,"/turtle1/cmd_vel",10)
         self.pos=self.create_subscription(Pose,"/turtle1/pose",self.rndm_mvmt,10)
+        self.client=self.create_subscription(SetPen,"/turtle1/set_pen",self.color_change)
         self.rotate=0.0
 
 
@@ -27,6 +29,9 @@ class rndm_mvmt(Node):
             v.linear.x=1.0
             v.angular.z=0.0
         self.vel.publish(v)
+
+
+            
 
 def main(args=None):
     rclpy.init(args=args)
