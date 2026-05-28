@@ -23,7 +23,7 @@ class new_turtle(Node):
         self.request.y=y
         self.request.theta=theta
         self.request.name=name
-        self.new.call_async(self.request)
+        return self.new.call_async(self.request)
 
 class follow(Node):
     def __init__(self):
@@ -61,28 +61,25 @@ class follow(Node):
             vel.linear.x=0.0
 
         else:
-            vel.linear.x=0.3*dist
+            vel.linear.x=min(0.3*dist,2)
             vel.angular.z=0.3*ang_diff
 
-        if dist<0.5:
+        if dist<0.5 and len(self.cord)>1:
             self.cord.popleft()
 
-        self.pub.publish(vel)        
-
-
-            
-                
-
-        
-
-
-
-
-
+        self.pub.publish(vel) 
+       
 
 
 def main(args=None):
     rclpy.init(args=args)
-    pass
+    node1=new_turtle()
+    future=node1.call_turtle(5.5,5.5,0.0,"turtle2")
+    rclpy.spin_until_future_complete(node1,future)
+    node1.destroy_node()
+    node2=follow()
+    rclpy.spin(node2)
+    rclpy.shutdown()
+    
 
 

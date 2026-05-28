@@ -32,7 +32,8 @@ setup(
         "add_server=robo_controller.server:main",
         "add_client=robo_controller.client:main",
         "colour_client=robo_controller.colour_client:main",
-        "colour_server=robo_controller.colour_server:main"
+        "colour_server=robo_controller.colour_server:main",
+        "path_follower=robo_controller.follower:main"
 
         ],
     },
