@@ -58,10 +58,10 @@ class follow(Node):
         ang_diff=np.arctan2(np.sin(diff),np.cos(diff))
         if abs(ang_diff)>0.5:
             vel.angular.z=1*ang_diff
-            vel.linear.x=0.0
+            vel.linear.x=0.2
 
         else:
-            vel.linear.x=min(0.3*dist,2)
+            vel.linear.x=min(0.9*dist,2.0)
             vel.angular.z=0.3*ang_diff
 
         if dist<0.5 and len(self.cord)>1:
