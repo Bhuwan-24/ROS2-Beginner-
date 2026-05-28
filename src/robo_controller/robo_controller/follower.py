@@ -18,10 +18,11 @@ class new_turtle(Node):
         self.request=Spawn.Request()
 
 
-    def call_turtle(self,x,y,theta):
+    def call_turtle(self,x,y,theta,name):
         self.request.x=x
         self.request.y=y
         self.request.theta=theta
+        self.request.name=name
         self.new.call_async(self.request)
 
 class follow(Node):
@@ -37,22 +38,40 @@ class follow(Node):
         self.my=p.y
         self.mt=p.theta
         if len(self.cord)==0:
-            self.cord.append([self.mx,self.my,self.mt])
+            self.cord.append([self.mx,self.my])
+        last_cord=self.cord[-1]
+        apnd=np.sqrt((self.mx-last_cord[0])**2+(self.my-last_cord[1])**2)
+        if apnd>1:
+            self.cord.append([self.mx,self.my])
 
     def path_follow(self,p:Pose):
+        vel=Twist()
         cx=p.x
         cy=p.y
         ct=p.theta
-        l=self.cord.pop()
+        if len(self.cord)==0:
+            return
+        target_pos=self.cord[0]
+        dist=np.sqrt((cx-target_pos[0])**2+(cy-target_pos[1])**2)
+        target_ang=np.arctan2(target_pos[1]-cy,target_pos[0]-cx)
+        diff=target_ang-ct
+        ang_diff=np.arctan2(np.sin(diff),np.cos(diff))
+        if abs(ang_diff)>0.5:
+            vel.angular.z=1*ang_diff
+            vel.linear.x=0.0
 
-        apnd_condn=np.sqrt((self.mx-l[0])**2-(self.my-l[1])**2)
-        if apnd_condn>1.0:
-            self.cord.append([self.mx,self.my,self.mt])
-        target_pos=self.cord.popleft()
-        dist=np.sqrt((cx-target_pos[0])**2-(cy-target_pos[1])**2)
-        diff=target_pos[2]-ct
-        ang_diff=np.arctan2tan(np.sin(diff),np.cos(diff))
-        
+        else:
+            vel.linear.x=0.3*dist
+            vel.angular.z=0.3*ang_diff
+
+        if dist<0.5:
+            self.cord.popleft()
+
+        self.pub.publish(vel)        
+
+
+            
+                
 
         
 
