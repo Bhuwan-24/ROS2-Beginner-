@@ -12,7 +12,7 @@ def generate_launch_description():
 
     master=Node(
         package="robo_controller",
-        executable="smart_turtle"
+        executable="crash_avoid"
     )
 
     follower=Node(
